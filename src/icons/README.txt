@@ -1,0 +1,1 @@
+All the svgs have taken from the official [spotify](https://open.spotify.com/) web page
