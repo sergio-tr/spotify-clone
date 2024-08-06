@@ -1,3 +1,73 @@
-<div class="text-center m-12 p-12">
-    Menu in here
-</div>
+---
+import Home from "../icons/Home.astro"
+import Search from "../icons/Search.astro"
+import Library from "../icons/Library.astro"
+import Plus from "../icons/Plus.astro"
+import MenuItem from "./AsideMenuItem.astro"
+---
+<nav class="flex flex-col flex-1 gap-2">
+    <div class="bg-zinc-900 rounded-md p-2">
+        <ul class="flex flex-col gap-4 p-3">
+
+            <MenuItem href="/">
+                <Home /> Inicio
+            </MenuItem>
+
+            <MenuItem href="/#">
+                <Search /> Buscar
+            </MenuItem>
+
+        </ul>
+    </div>
+
+    <div class="flex flex-col flex-1 bg-zinc-900 rounded-md p-2">
+        <ul class="flex flex-col gap-4 p-3">
+            <MenuItem href="/#">
+
+                <div class="flex justify-between items-center w-full">
+
+                    <div class="flex items-center gap-4">
+                        <Library /> Tu biblioteca
+                    </div>
+                    <a class="relative flex items-center justify-center p-2 rounded-full transition-colors duration-300 text-zinc-400 hover:text-zinc-100" 
+                       href="/#">
+                        <Plus />
+                        <span class="absolute inset-0 rounded-full bg-transparent transition-colors"></span>
+                    </a>
+                    
+                </div>
+
+            </MenuItem>
+        </ul>
+
+        <div class="flex flex-1 items-center justify-center">
+            Aquí deberían aparecer listas/canciones
+        </div>
+        
+    </div>
+
+
+</nav>
+
+<style>
+    a.relative {
+        position: relative;
+    }
+
+    a.relative span {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 40px; 
+        height: 40px; 
+        background-color: transparent;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: background-color 0.3s ease;
+    }
+
+    a.relative:hover span {
+        background-color: rgba(209, 213, 219, 0.1);
+    }
+</style>
