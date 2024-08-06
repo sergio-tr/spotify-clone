@@ -1,9 +1,13 @@
 ---
-import Home from "../icons/Home.astro"
-import Search from "../icons/Search.astro"
-import Library from "../icons/Library.astro"
-import Plus from "../icons/Plus.astro"
-import MenuItem from "./AsideMenuItem.astro"
+import Home from "@/icons/Home.astro"
+import Search from "@/icons/Search.astro"
+import Library from "@/icons/Library.astro"
+import Plus from "@/icons/Plus.astro"
+import MenuItem from "@/components/AsideMenuItem.astro"
+import MenuCard from "@/components/AsideMenuCard.astro"
+
+import { playlists } from "@/lib/data"
+
 ---
 <nav class="flex flex-col flex-1 gap-2">
     <div class="bg-zinc-900 rounded-md p-2">
@@ -21,7 +25,7 @@ import MenuItem from "./AsideMenuItem.astro"
     </div>
 
     <div class="flex flex-col flex-1 bg-zinc-900 rounded-md p-2">
-        <ul class="flex flex-col gap-4 p-3">
+        <ul class="flex flex-col gap-2 p-3">
             <MenuItem href="/#">
 
                 <div class="flex justify-between items-center w-full">
@@ -38,11 +42,16 @@ import MenuItem from "./AsideMenuItem.astro"
                 </div>
 
             </MenuItem>
+
+            {
+                playlists.map(playlist => 
+                    <MenuCard playlist={playlist}>
+                    </MenuCard>
+                )
+            }
         </ul>
 
-        <div class="flex flex-1 items-center justify-center">
-            Aquí deberían aparecer listas/canciones
-        </div>
+        
         
     </div>
 

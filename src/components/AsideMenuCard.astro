@@ -1,0 +1,35 @@
+---
+import type { Playlist } from '@/lib/data';
+
+interface Props {
+    playlist : Playlist;
+}
+
+const { playlist } = Astro.props
+
+const { id, cover, title, albumId, artists, color } = playlist
+
+// The navigator/browser language could be used
+const listFormat = new Intl.ListFormat('es', { style: 'long', type: 'conjunction' })
+
+const allArtistsTogether = listFormat.format(artists)
+---
+
+<a href={`/playlist/${id}`} 
+   class="playlist-item flex relative p-2 overflow-hidden items-center gap-5 rounded-md hover:bg-zinc-800">
+
+   <picture class="h-12 w-14 flex-none">
+        <img src={cover} 
+             alt={`Portada de ${title} - ${allArtistsTogether}`} class="object-cover w-full h-full rounded-md">
+   </picture>
+
+   <div class="flex flex-col flex-auto truncate">
+        <p class="text-white font-medium">
+            {title}
+        </p>
+
+        <span class="text-sm text-gray-400">
+            {allArtistsTogether}
+        </span>
+   </div>
+</a>
