@@ -14,7 +14,12 @@
       ],
       "@/lib": [
         "src/lib/*"
-      ]
-    }
+      ],
+      "@/stores": [
+        "src/stores/*"
+      ],
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
   }
 }

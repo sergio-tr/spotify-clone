@@ -24,6 +24,7 @@ This project involves cloning the core features of Spotify using the following t
   - **Tailwind CSS**: For responsive and customizable styling.
   - **Svelte**: For creating reusable and reactive components.
   - **Astro**: To manage the integration of React and Svelte components and optimize the final build.
+  - **Zustand**: For persisting and synchronizing the state of the played music across the application.
 
 ## Getting Started
 

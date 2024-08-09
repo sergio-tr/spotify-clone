@@ -1,9 +1,37 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '@/layouts/Layout.astro';
+
+import MainCard from '@/components/MainCard.astro'
+import Greeting from '@/components/Greeting.svelte'
+
+import { playlists } from '@/lib/data';
+
 ---
 
-<Layout title="First simple approach">
-	
+<Layout title="Clon de Spotify">
+	<div id="playlist-container" class="relative transition-all duration-1000 bg-green-600">
+		
+		<!-- Arrows -->
+
+		<!-- Welcome -->
+		<div class="relative z-10 px-6 pt-10">
+			
+			<Greeting />
+			
+			<div class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(200px,1fr))] mt-8">
+				{
+					playlists.map(playlist => 
+						<MainCard playlist={playlist}>
+						</MainCard>
+					)
+				}
+			</div>
+
+		</div>
+
+		<div class="absolute gradient inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/90"></div>
+	</div>
+
 </Layout>
 
 <style>

@@ -1,0 +1,49 @@
+---
+import type { Playlist } from '@/lib/data';
+import { MainCardPlayButton } from '@/components/MainCardPlayButton'
+
+interface Props {
+    playlist : Playlist;
+}
+
+const { playlist } = Astro.props
+
+const { id, cover, title, albumId, artists, color } = playlist
+
+// The navigator/browser language could be used
+const listFormat = new Intl.ListFormat('es', { style: 'long', type: 'conjunction' })
+
+const allArtistsTogether = listFormat.format(artists)
+---
+<article class="group relative hover:bg-zinc-800 shadow-lg hover:shadow-xl bg-zinc-500/30 rounded-md">
+
+    <div class="absolute right-4 bottom-20 translate-y-4 transition-all duration-500 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 z-10">
+        <MainCardPlayButton id={id} size="big" client:visible/>
+    </div>
+
+    <a href={`/playlist/${id}`} 
+       class="playlist-item transition-all duration-300 flex flex-col relative p-2 gap-5"
+       transition:name=`main-${id}-box`>
+
+        <picture class="aspect-square h-auto w-full flex-none">
+                <img src={cover} 
+                    alt={`Portada de ${title} --> ${allArtistsTogether}`} 
+                    class="object-cover w-full h-full rounded-md"
+                    transition:name=`main-${id}-image` />
+        </picture>
+
+        <div class="flex flex-col flex-auto">
+                <p class="text-white font-medium truncate"
+                transition:name=`main-${playlist?.id}-title`>
+                    {title}
+                </p>
+
+                <span class="text-sm text-gray-400 truncate"
+                    transition:name=`main-${playlist?.id}-artists`>
+                    {allArtistsTogether}
+                </span>
+        </div>
+    </a>
+
+
+</article>
