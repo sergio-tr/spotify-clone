@@ -1,9 +1,10 @@
 ---
 
+import PlaylistSongsTable from "@/components/PlaylistSongsTable.astro";
 import Layout from "../../layouts/Layout.astro"
-
-import MainCard from "@/components/MainCard.astro"
 import { allPlaylists, songs } from "@/lib/data";
+
+import { MainCardPlayButton } from "@/components/MainCardPlayButton";
 
 const { id } = Astro.params
 
@@ -36,11 +37,10 @@ const [hours, minutes] = getTotalTime(playlistSongs.map(song => song.duration))
 
 <Layout title="Clon de Spotify">
     <div id="playlist-container" 
-		 class="relative flex flex-col h-full bg-zinc-900 overflow-x-hidden"
+		 class={`flex flex-col relative transition-all duration-1000 overflow-x-hidden ${playlist?.color?.bgColor}`}
          transition:name=`main-${playlist?.id}-box`>
 
 		<!-- Arrows -->
-
 
 		<header class="flex gap-8 p-4 mt-4">
 			<picture class="aspect-square h-44 w-44 flex-none mt-4">
@@ -77,9 +77,12 @@ const [hours, minutes] = getTotalTime(playlistSongs.map(song => song.duration))
 			</div>
 		</header>
 
-		<!-- Welcome -->
-		<div class="relative z-10 px-6 pt-10">
+		<div class="ml-6 py-4">
+			<MainCardPlayButton client:load id={id} size="big"/>
+		</div>
 
+		<div>
+			<PlaylistSongsTable songs={playlistSongs} />
 		</div>
 
 		<div class="absolute gradient inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/90 -z-10"></div>
