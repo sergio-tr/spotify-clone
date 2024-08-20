@@ -6,7 +6,7 @@ export const CurrentSong = ({ image, title, artists }) => {
     return (
       <div className="flex items-center gap-5 relative overflow-hidden px-3 mt-3">
         <picture className="w-16 h-16 bg-zinc-800 rounded-md shadow-md overflow-hidden">
-          <img src={image} alt={title} />
+          <img src={image ?? '/nomusic.jpeg'} alt={title} />
         </picture>
   
         <div className="flex flex-col">

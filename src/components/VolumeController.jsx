@@ -27,11 +27,11 @@ export const VolumeController = () => {
     }
 
     const handleVolumeClick = () => {
-        volume < 0.1 ? handleClickPrevVolume() : handleClickSilent()
+        volume === 0 ? handleClickPrevVolume() : handleClickSilent()
     }
 
     const getVolumeIcon = () => {
-        if (volume < 0.1) return <VolumeSilence />
+        if (volume === 0) return <VolumeSilence />
         return <VolumeHigh />
     };
 
