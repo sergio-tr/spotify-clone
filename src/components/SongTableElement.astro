@@ -15,7 +15,7 @@ const { id, song, position, color } = Astro.props
 
 <tr class="border-spacing-0 text-gray-300 text-sm font-light hover:bg-zinc-800 overflow-hidden transition duration-300">
     <td class="px-4 py-2 w-4 rounded-tl-lg rounded-bl-lg">
-        <MainCardPlayButton id={id} songNumber={song.id-1} size="extra-small" bgColor={color.bgColor} bgHoverColor={color.bgHoverColor} client:load/>
+        <MainCardPlayButton id={id} songNumber={song.id} size="extra-small" bgColor={color.bgColor} bgHoverColor={color.bgHoverColor} client:load/>
     </td>
     <td class="px-4 py-2 w-4"> {position} </td>
     <td class="px-4 py-2 flex gap-3">

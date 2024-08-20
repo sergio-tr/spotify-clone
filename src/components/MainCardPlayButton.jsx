@@ -4,28 +4,33 @@ import { usePlayerStore } from '@/stores/playerStore'
 export function MainCardPlayButton({ id, songNumber = -1, size = 'small', bgColor = 'bg-green-500', bgHoverColor = 'bg-green-400' }){
     const { currentMusic, isPlaying, setIsPlaying, setCurrentMusic } = usePlayerStore(state => state)
 
-    let isThisPlaying = songNumber === -1 
+    const isThisSongPlaying = songNumber === -1 
         ? isPlaying && currentMusic?.playlist?.id === id
-        : isPlaying && currentMusic?.playlist?.id === id && currentMusic?.song?.id-1 === songNumber
+        : isPlaying && currentMusic?.playlist?.id === id && currentMusic?.song?.id === songNumber
+
+    const thisSong = currentMusic?.song?.id === songNumber
+
+    const songInSamePlaylist = songNumber === -1 && currentMusic?.song?.id
 
     const handleClick = () => {
 
-        if(isThisPlaying){
+        if( isThisSongPlaying ){
             setIsPlaying(false)
             return
         }
 
-        if(currentMusic?.playlist?.id !== id){
-            fetch(`/api/get-info-playlist.json?id=${id}`)
+        if( thisSong || songInSamePlaylist ){
+            setIsPlaying(true)
+            return
+        }
+
+        fetch(`/api/get-info-playlist.json?id=${id}`)
             .then(res => res.json())
             .then(data => {
                 const { songs, playlist } = data
 
-                setCurrentMusic({ songs, playlist, song: songs[songNumber === -1 ? 0 : songNumber] })
+                setCurrentMusic({ songs, playlist, song: songs[songNumber === -1 ? 0 : songNumber-1] })
             })
-        } else {
-            setIsPlaying(true)
-        }
 
     }
 
@@ -37,6 +42,6 @@ export function MainCardPlayButton({ id, songNumber = -1, size = 'small', bgColo
     const buttonClassName = `main-card-play-button rounded-full ${bgColor} p-4 hover:scale-105 transition hover:${bgHoverColor}`
 
     return <button className={buttonClassName} onClick={handleClick}>
-        {isThisPlaying ? <Pause className={ iconClassName }/> : <Play className={ iconClassName } />}
+        {isThisSongPlaying ? <Pause className={ iconClassName }/> : <Play className={ iconClassName } />}
     </button>
 }
