@@ -28,12 +28,16 @@ const { title } = Astro.props
       </aside>
 
       <main class="[grid-area:main] rounded-md bg-zinc-900 overflow-y-auto w-full">
-		    Main here
         <slot />
       </main>
 
-      <footer class="[grid-area:player] h-[80px]">
-		    <Player />
+      <footer class="[grid-area:player] h-20">
+
+        <!-- Necessary to load in client for interactivity -->
+        <!-- ASTRO (VIEW TRANSITIONS API)
+             Necessary to persist for mainting the state when redirecting -->
+        
+		    <Player client:load transition:name="music-player" transition:persist/>
       </footer>
     </div>
     <style>

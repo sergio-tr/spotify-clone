@@ -1,10 +1,10 @@
-import { colors } from "./colors";
+import { colors, type Color } from "./colors";
 
 export interface Playlist {
   id: string;
   albumId: number;
   title: string;
-  color: (typeof colors)[keyof typeof colors];
+  color: Color;
   cover: string;
   artists: string[];
 }

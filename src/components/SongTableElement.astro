@@ -1,0 +1,32 @@
+---
+import { type Song } from "@/lib/data";
+import { type Color } from "@/lib/colors";
+import { MainCardPlayButton } from "./MainCardPlayButton";
+
+interface Props {
+    id: string
+    song: Song
+    position: number
+    color: Color
+}
+
+const { id, song, position, color } = Astro.props
+---
+
+<tr class="border-spacing-0 text-gray-300 text-sm font-light hover:bg-zinc-800 overflow-hidden transition duration-300">
+    <td class="px-4 py-2 w-4 rounded-tl-lg rounded-bl-lg">
+        <MainCardPlayButton id={id} songNumber={song.id} size="extra-small" bgColor={color.bgColor} bgHoverColor={color.bgHoverColor} client:load/>
+    </td>
+    <td class="px-4 py-2 w-4"> {position} </td>
+    <td class="px-4 py-2 flex gap-3">
+        <picture class="">
+            <img src={song.image} alt={song.title} class="w-11 h-11" />
+        </picture>
+        <div class="flex flex-col">
+            <p class="text-white text-base font-normal">{song.title}</p>
+            <span> { new Intl.ListFormat('es', { style: 'long', type: 'conjunction' }).format(song.artists) } </span>
+        </div>
+    </td>
+    <td class="px-4 py-2"> {song.album} </td>
+    <td class="px-4 py-2 rounded-tr-lg rounded-br-lg"> {song.duration} </td>
+</tr>

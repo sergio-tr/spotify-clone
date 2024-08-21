@@ -1,9 +1,45 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '@/layouts/Layout.astro'
+
+import HeaderNavigator from '@/components/HeaderNavigator.astro'
+
+import Greeting from '@/components/Greeting.svelte'
+
+import MainCard from '@/components/MainCard.astro'
+
+import { greenColor } from '@/lib/colors'
+
+import { playlists } from '@/lib/data'
+
+const mainContainer = `relative transition-all duration-1000 ${greenColor.bgColor}`
+
 ---
 
-<Layout title="First simple approach">
-	
+<Layout title="Clon de Spotify">
+	<div id="playlist-container" class={mainContainer}>
+
+		<div class="relative z-10 px-6">
+			
+			<header class="flex flex-col gap-y-10 pt-4">
+				<HeaderNavigator />
+			
+				<Greeting />
+			</header>
+
+			<div class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(200px,1fr))] mt-8">
+				{
+					playlists.map(playlist => 
+						<MainCard playlist={playlist}>
+						</MainCard>
+					)
+				}
+			</div>
+
+		</div>
+
+		<div class="absolute gradient inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/90"></div>
+	</div>
+
 </Layout>
 
 <style>

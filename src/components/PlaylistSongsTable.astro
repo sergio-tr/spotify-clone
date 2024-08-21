@@ -1,0 +1,35 @@
+---
+import Time from "@/icons/Time.astro"
+import Play from "@/icons/Play.astro"
+import { type Song } from "@/lib/data"
+import SongTableElement from "@/components/SongTableElement.astro"
+import { type Color } from "@/lib/colors"
+
+interface Props {
+    id: string
+    songs: Song[]
+    color: Color
+}
+
+const { id, songs, color } = Astro.props
+---
+
+<table class="table-auto text-left min-w-full divide-y divide-gray-500/20">
+    <thead>
+        <tr class="text-zinc-400 text-sm">
+        <th class="pl-5 py-2 font-light"> <Play /> </th>
+        <th class="px-4 py-2 font-light">#</th>
+        <th class="px-4 py-2 font-light">Título</th>
+        <th class="px-4 py-2 font-light">Álbum</th>
+        <th class="px-4 py-2 font-light"><Time /></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {
+            songs.map((song, index) => (
+                <SongTableElement id={id} song={song} position={index+1} color={color}/>
+            ))
+        }
+    </tbody>
+</table>
